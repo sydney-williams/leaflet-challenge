@@ -52,30 +52,53 @@ d3.json(queryUrl, function(data) {
   fillOpacity: 0.8
 };
 
-  function getColor(mag) {
-    if (mag > 3) {
-      return 'red'
-    } else {
-      return 'blue'
-    }
-    if (mag > 6) {
-      return 'yellow'
-    } else {
-      return 'green'
-    }
-    if (mag > 9) {
-      return 'orange'
-    } else {
-      return 'purple'
-    }
-    if (mag > 12) {
-      return 'red'
-    } else {
-      return 'black'
-    }
+  // function getColor(mag) {
+  //   if (mag > 3) {
+  //     return 'red'
+  //   } else {
+  //     return 'blue'
+  //   }
+  //   if (mag > 6) {
+  //     return 'yellow'
+  //   } else {
+  //     return 'green'
+  //   }
+  //   if (mag > 9) {
+  //     return 'orange'
+  //   } else {
+  //     return 'purple'
+  //   }
+  //   if (mag > 12) {
+  //     return 'red'
+  //   } else {
+  //     return 'black'
+  //   }
 
-  }
+  // }
 
+  //get rid of the 'if else' just if then retutn 'x'  
+  function getColor(mag){
+    if (mag > 6){
+      return "red";
+    }
+    if (mag > 5){
+      return "purple";
+    }
+    if (mag > 4){
+      return "orange";
+    }
+    if (mag > 3){
+      return "yellow";
+    }
+    if (mag > 2){
+      return "blue";
+    }
+    if (mag > 1){
+      return "green";
+    }
+   }
+  
+ 
   L.geoJSON(data, {
 
     
@@ -88,8 +111,24 @@ d3.json(queryUrl, function(data) {
     }
 
 
-
     }).addTo(myMap); 
+ 
+    // the reason why you return 1 if the magnitude is 0 is because, you have to have someting in there and multiply every other value by 4 otherwise
+  
+    function getRadius(mag){
+    if (mag === 0){
+      return 1;
+    }
+    return mag * 4;
+  }  
+
+  L.geoJSON(data, {
+    pointToLayer: function (feature, latlng) {
+        geojsonMarkerOptions['radius'] = getRadius(feature.properties.mag)
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    }
+    }).addTo(myMap);
+
 });
 
 
