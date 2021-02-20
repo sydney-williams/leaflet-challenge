@@ -76,13 +76,13 @@ d3.json(queryUrl, function(data) {
 
   // }
 
-  //get rid of the 'if else' just if then retutn 'x'  
+  //get rid of the 'if else' and just put if then return 'x' 
   function getColor(mag){
     if (mag > 6){
       return "red";
     }
     if (mag > 5){
-      return "purple";
+      return "blue";
     }
     if (mag > 4){
       return "orange";
@@ -91,10 +91,10 @@ d3.json(queryUrl, function(data) {
       return "yellow";
     }
     if (mag > 2){
-      return "blue";
+      return "green";
     }
     if (mag > 1){
-      return "green";
+      return "white";
     }
    }
   
